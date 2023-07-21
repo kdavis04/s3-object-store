@@ -16,7 +16,6 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 @Service
 @Slf4j
 public class S3Service {
-
   private final String bucket;
   private final S3Client s3Client;
 

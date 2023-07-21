@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/objects")
 public class S3Controller {
-
   private final S3Service s3Service;
 
   public S3Controller(S3Service s3Service) {
@@ -19,7 +18,7 @@ public class S3Controller {
   }
 
   @PostMapping
-  public String putObject(@RequestBody byte[] file) {
+  public String postObject(@RequestBody byte[] file) {
     return s3Service.putS3Object(file);
   }
 

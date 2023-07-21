@@ -35,8 +35,24 @@ dependencies {
 
 	// Apache Commons IO
 	implementation 'org.apache.directory.studio:org.apache.commons.io:2.4'
+
+	// Lombok for tests
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	// Testcontainers for LocalStack
+	testImplementation 'org.testcontainers:localstack'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+spotless {
+	java {
+		// don't need to set target, it is inferred from java
+		removeUnusedImports()
+		googleJavaFormat()
+		formatAnnotations()
+	}
 }
