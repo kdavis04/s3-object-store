@@ -49,14 +49,17 @@ import software.amazon.awssdk.services.s3.model.S3Object;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 class S3SingletonIT {
+
   private static final String S3_BUCKET = "test-bucket";
   private static final RestTemplate template = new RestTemplate();
-  private static S3Client s3Client;
 
   @Container
   static LocalStackContainer localStackContainer =
       new LocalStackContainer(DockerImageName.parse("localstack/localstack:1.1.0"))
           .withServices(LocalStackContainer.Service.S3);
+
+  private static S3Client s3Client;
+  @LocalServerPort int port;
 
   @DynamicPropertySource
   static void registerS3Properties(DynamicPropertyRegistry registry) {
@@ -81,8 +84,6 @@ class S3SingletonIT {
     s3Client.createBucket(b -> b.bucket(S3_BUCKET));
     //    or localStackContainer.execInContainer("awslocal", "s3", "mb", "s3://test-bucket");
   }
-
-  @LocalServerPort int port;
 
   @AfterEach
   void init() {

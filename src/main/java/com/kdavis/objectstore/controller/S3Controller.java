@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/objects")
 public class S3Controller {
+
   private final S3Service s3Service;
 
   public S3Controller(S3Service s3Service) {

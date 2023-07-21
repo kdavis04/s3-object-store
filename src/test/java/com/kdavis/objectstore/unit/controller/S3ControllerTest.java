@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class S3ControllerTest {
+
   private S3Controller s3Controller;
   @Mock private S3Service s3Service;
 

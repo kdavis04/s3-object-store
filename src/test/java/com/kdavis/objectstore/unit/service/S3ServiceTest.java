@@ -2,7 +2,8 @@ package com.kdavis.objectstore.unit.service;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
@@ -28,11 +29,12 @@ import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
 @ExtendWith(MockitoExtension.class)
 class S3ServiceTest {
+
+  private final ArgumentCaptor<PutObjectRequest> putObjectRequestArgumentCaptor =
+      ArgumentCaptor.forClass(PutObjectRequest.class);
   private S3Service s3Service;
   @Mock private S3Client s3Client;
   @Mock private S3Configuration s3Configuration;
-  private final ArgumentCaptor<PutObjectRequest> putObjectRequestArgumentCaptor =
-      ArgumentCaptor.forClass(PutObjectRequest.class);
 
   @BeforeEach
   void setUp() {

@@ -16,6 +16,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 @ConfigurationProperties
 @Setter
 public class S3Configuration {
+
   private String endpoint;
   private String region;
   private String accessKey;

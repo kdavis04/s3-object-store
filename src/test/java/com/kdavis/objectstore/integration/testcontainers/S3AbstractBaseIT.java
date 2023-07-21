@@ -36,17 +36,11 @@ import software.amazon.awssdk.services.s3.model.S3Object;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 public abstract class S3AbstractBaseIT {
-  private static final String S3_BUCKET = "test-bucket";
+
   protected static final RestTemplate template = new RestTemplate();
+  private static final String S3_BUCKET = "test-bucket";
   private static final LocalStackContainer localStackContainer;
   private static final S3Client s3Client;
-
-  @DynamicPropertySource
-  static void registerS3Properties(DynamicPropertyRegistry registry) {
-    registry.add(
-        "endpoint", () -> localStackContainer.getEndpointOverride(LocalStackContainer.Service.S3));
-    registry.add("region", localStackContainer::getRegion);
-  }
 
   static {
     localStackContainer =
@@ -69,6 +63,13 @@ public abstract class S3AbstractBaseIT {
   }
 
   @LocalServerPort int port;
+
+  @DynamicPropertySource
+  static void registerS3Properties(DynamicPropertyRegistry registry) {
+    registry.add(
+        "endpoint", () -> localStackContainer.getEndpointOverride(LocalStackContainer.Service.S3));
+    registry.add("region", localStackContainer::getRegion);
+  }
 
   @AfterEach
   void init() {
